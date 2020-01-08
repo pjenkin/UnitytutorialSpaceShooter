@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
     private float _laser_spawn_offset = 0.8f;
-    private float 
+    [SerializeField]
+    private float _fireRate = 0.5f;
+    private float _nextFire = 0f;
 
 
     // for demo purposes check horizontal input
@@ -37,8 +39,10 @@ public class Player : MonoBehaviour
 
         // if space key hit, spawn object (use keyboard input manager)
 
-        if (Input.GetKeyDown(KeyCode.Space))        // 5-31 Instantiating 'laser' object
+        //if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)        // 5-31 Instantiating 'laser' object & 5-37 'Cooling-down' system
         {
+            _nextFire = Time.time + _fireRate;  // 5-37 Cooling-Down system - set next time at which it'll be possible to fire
             // Debug.Log("Space key pressed!!!");
             //Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
             // 5-36 offset laser object's instantiation position to avoid clipping Player primitive
