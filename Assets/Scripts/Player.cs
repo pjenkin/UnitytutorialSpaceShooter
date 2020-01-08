@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
     // public float speed = 3.5f;
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
+    private GameObject _laserPrefab;
 
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
@@ -29,6 +31,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();    // 
+
+        // if space key hit, spawn object (use keyboard input manager)
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Debug.Log("Space key pressed!!!");
+            Instantiate(_laserPrefab);
+
+        }
     }
 
     // 4-26 Code Cleanup i.e. refactoring to a new method
