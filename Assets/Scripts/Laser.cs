@@ -17,6 +17,11 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateMovement();
+    }
+
+    private void CalculateMovement()
+    {
         transform.Translate(Vector3.up * _speed * Time.deltaTime);  // 5-32 Laser behaviour (movement upward)
         if (transform.position.y >= _screen_top) // 5-34 destroy laser objects at top of screen challenge
         {
