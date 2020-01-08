@@ -36,7 +36,10 @@ public class Player : MonoBehaviour
     void Update()
     {    
         CalculateMovement();
-        FireLaser();            // cf Cleanup sections for refactoring
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)        // 5-31 Instantiating 'laser' object & 5-37 'Cooling-down' system
+        {
+            FireLaser();            // cf Cleanup sections for refactoring
+        }
     }
 
     // 4-26 Code Cleanup i.e. refactoring to a new method
@@ -107,13 +110,13 @@ public class Player : MonoBehaviour
         // if space key hit, spawn object (use keyboard input manager)
 
         //if (Input.GetKeyDown(KeyCode.Space))
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)        // 5-31 Instantiating 'laser' object & 5-37 'Cooling-down' system
-        {
+        //if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)        // 5-31 Instantiating 'laser' object & 5-37 'Cooling-down' system
+        //{
             _nextFire = Time.time + _fireRate;  // 5-37 Cooling-Down system - set next time at which it'll be possible to fire
             // Debug.Log("Space key pressed!!!");
             //Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
             // 5-36 offset laser object's instantiation position to avoid clipping Player primitive
             Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + _laser_spawn_offset, transform.position.z), Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
-        }
+        //}
     }
 }
