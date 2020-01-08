@@ -34,10 +34,10 @@ public class Player : MonoBehaviour
 
         // if space key hit, spawn object (use keyboard input manager)
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))        // 5-31 Instantiating 'laser' object
         {
             // Debug.Log("Space key pressed!!!");
-            Instantiate(_laserPrefab);
+            Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
 
         }
     }
