@@ -9,6 +9,9 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     [SerializeField]
     private GameObject _laserPrefab;
+    private float _laser_spawn_offset = 0.8f;
+    private float 
+
 
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
@@ -29,7 +32,7 @@ public class Player : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {    
         CalculateMovement();    // 
 
         // if space key hit, spawn object (use keyboard input manager)
@@ -37,8 +40,9 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))        // 5-31 Instantiating 'laser' object
         {
             // Debug.Log("Space key pressed!!!");
-            Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
-
+            //Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
+            // 5-36 offset laser object's instantiation position to avoid clipping Player primitive
+            Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + _laser_spawn_offset, transform.position.z), Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
         }
     }
 
