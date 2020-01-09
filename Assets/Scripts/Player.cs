@@ -13,6 +13,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = 0.5f;
     private float _nextFire = 0f;
+    
+    [SerializeField]
+    private float _player_top_max = 0f;
+    
+    [SerializeField]
+    private float _player_bottom_max = -3.8f;
+    [SerializeField]
+    private float _player_left_side_max = -8.5f;
+    [SerializeField]
+    private float _player_right_side_max = 8.5f;
 
 
     // for demo purposes check horizontal input
@@ -81,19 +91,19 @@ public class Player : MonoBehaviour
         }
 */
         // 4-26 use .clamp to set Player bounds (in Code Cleanup) - won't work for wrapping though
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,-3.8f,0), transform.position.z);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,_player_bottom_max,_player_top_max), transform.position.z);
 
 
         // 4-24 user bounds/wrap challenge
         // vertical/horizontal bounds in separate clauses else only the 1st may be checked-for (and the 2nd ignored)
         // wrap from left side (approx -8.5 in x) to right, and vice-versa
-        if (transform.position.x <= -8.5f)
+        if (transform.position.x <= _player_left_side_max)
         {
-            transform.position = new Vector3(8.5f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(_player_left_side_max, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x >= 8.5f)
+        else if (transform.position.x >= _player_right_side_max)
         {
-            transform.position = new Vector3(-8.5f, transform.position.y, transform.position.z);
+            transform.position = new Vector3(_player_right_side_max, transform.position.y, transform.position.z);
         }
 
         // if the Player's position in y > 0 then y = 0 (to restrict to zero)
