@@ -42,4 +42,28 @@ public class Enemy : MonoBehaviour
             transform.position = new Vector3(_enemy_random_x_pos, _enemy_top_max, 0);       // NB Translate to move relative; position to set absolute! 6-43
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // if other (collider) is a Player
+        //if (other.transform.name == "Player")
+        if (other.tag == "Player")
+        {
+            // damage the player
+            //player.damage++; 
+            // then Destroy this (the Enemy)
+            Destroy(this.gameObject);
+            Debug.Log("Hit with: " + other.transform.name); // 6-45
+        }
+        // if other (collider) is a Laser
+        //else if (other.transform.name == "Laser") // trnasform.name didn't seem to work for laser
+        if (other.tag == "Laser")
+        {
+            // Destroy the laser
+            Destroy(other.gameObject);
+            // then Destroy this (the Enemy)
+            Destroy(this.gameObject);
+            Debug.Log("Hit with: " + other.transform.name); // 6-45
+        }
+    }
 }
