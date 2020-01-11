@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _player_right_side_max = 8.5f;
 
+    [SerializeField]
+    private int _lives = 3;
+
 
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
@@ -128,5 +131,16 @@ public class Player : MonoBehaviour
             // 5-36 offset laser object's instantiation position to avoid clipping Player primitive
             Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + _laser_spawn_offset, transform.position.z), Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
         //}
+    }
+
+    public void Damage()        // 6-47 Player lives/damage NB public so as to be accssible from Enemy
+    {
+        _lives--;
+
+        // check if Player dead - destroy Player if so
+        if (_lives < 1)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

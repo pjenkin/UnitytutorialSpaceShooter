@@ -49,14 +49,17 @@ public class Enemy : MonoBehaviour
         //if (other.transform.name == "Player")
         if (other.tag == "Player")
         {
-            // damage the player
-            //player.damage++; 
+            // other.transform.GetComponent<Player>().Damage();    // 6-47 Player lives--/damage sustained by GetComponent generic - unsafe with no null check
+            Player player = other.transform.GetComponent<Player>();
+            // null check for Player (script) component in collided-with object
+            player?.Damage(); // damage the player (6-47) Player lives--/damage sustained
+
             // then Destroy this (the Enemy)
             Destroy(this.gameObject);
             Debug.Log("Hit with: " + other.transform.name); // 6-45
         }
         // if other (collider) is a Laser
-        //else if (other.transform.name == "Laser") // trnasform.name didn't seem to work for laser
+        //else if (other.transform.name == "Laser") // transform.name didn't seem to work for laser
         if (other.tag == "Laser")
         {
             // Destroy the laser
