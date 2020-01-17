@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _lives = 3;
 
+    private SpawnManager _spawnManager;  // 7-54 the (script) component of the SpawnManager game object
+
 
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
@@ -34,6 +36,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 7-54 (Stop spawning when player has died) - just use plain Find (as per Inspector name) in this case
+        _spawnManager = GameObject.Find("Spawn_Manager").transform.GetComponent<SpawnManager>();
     
         Vector3 vec3 = new Vector3(0, 0);       // Z is 0 by default
         transform.position = vec3;
@@ -140,6 +144,11 @@ public class Player : MonoBehaviour
         // check if Player dead - destroy Player if so
         if (_lives < 1)
         {
+            _spawnManager?.OnPlayerDeath();  // 7-54 Communicate with spawn manager (and null check)
+            if (_spawnManager == null)
+            {
+                Debug.LogError("no Spawn Manager found (null)");
+            }
             Destroy(this.gameObject);
         }
     }
