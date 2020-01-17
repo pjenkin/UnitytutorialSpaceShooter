@@ -43,7 +43,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    // private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)     // 58 Enemy 3D altered to 2D 
     {
         // if other (collider) is a Player
         //if (other.transform.name == "Player")
