@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager class/(actually empty GameObject in hierarchy)
 {
     // 7-51 Challenge: Spawn Routine
-    [SerializeField]
+    [SerializeField]                   // *must* be serialized, so as to be able to drag&drop Prefab to this field in Inspector
     public GameObject _enemyPrefab;    // this must be manually dragged from the Prefabs folder to this field in the Inspector (NB public also?)
     [SerializeField]
     private float _enemy_bottom_max = -3.8f;
@@ -32,6 +32,7 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
         // _enemyPrefab = Resources.Load<GameObject>("Enemy") as GameObject;    // not needed - just drag&drop in Inspector (https://gamedev.stackexchange.com/a/158713) https://docs.unity3d.com/Manual/InstantiatingPrefabs.html
         _coroutine = SpawnRoutine(_spawn_interval);
         StartCoroutine(_coroutine);         // run the Spawning method of the SpawnManager every 5 seconds e.g.
+        // NB could have used a string as the name of the coroutine routine
 
     }
 
@@ -56,6 +57,7 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
             Instantiate(_enemyPrefab, _enemy_position, Quaternion.identity);                    // Instantiate an Enemy prefab
 
             yield return new WaitForSeconds(interval);    // (when should we run this code again?) yield 'wait for 5 seconds'
+            // NB yield is required by IEnumerator
         }
     }
 }
