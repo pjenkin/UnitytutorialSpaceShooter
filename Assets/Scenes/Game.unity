@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 557828401}
   - component: {fileID: 557828403}
   - component: {fileID: 557828404}
+  - component: {fileID: 557828405}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -392,6 +393,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.3791482, y: 5.12}
   m_EdgeRadius: 0
+--- !u!114 &557828405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557828400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf51c1f22fbe204b8eae30fe00591a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 3.5
+  _laserPrefab: {fileID: 5708375614493180632, guid: a9f0bb3d4c7cad34086c02dc1e353c69,
+    type: 3}
+  _fireRate: 0.5
+  _player_top_max: 0
+  _player_bottom_max: -3.8
+  _player_left_side_max: -8.5
+  _player_right_side_max: 8.5
+  _lives: 3
+  horizontalInputDemo: 0
 --- !u!1 &1032974573
 GameObject:
   m_ObjectHideFlags: 0
