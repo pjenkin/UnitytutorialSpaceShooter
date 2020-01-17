@@ -28,8 +28,6 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
     void Start()
     {
 
-//        Instantiate(_enemyPrefab, _enemy_position, Quaternion.identity);                    // Instantiate an Enemy prefab
-        // _enemyPrefab = Resources.Load<GameObject>("Enemy") as GameObject;    // not needed - just drag&drop in Inspector (https://gamedev.stackexchange.com/a/158713) https://docs.unity3d.com/Manual/InstantiatingPrefabs.html
         _coroutine = SpawnRoutine(_spawn_interval);
         StartCoroutine(_coroutine);         // run the Spawning method of the SpawnManager every 5 seconds e.g.
         // NB could have used a string as the name of the coroutine routine
