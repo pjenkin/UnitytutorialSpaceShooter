@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private float _laser_spawn_offset = 1.05f;       // 8-59 laser 3d to 2d - was 0.8 when 3d
     [SerializeField]
     private float _fireRate = 0.5f;
-    private float _nextFire = 0f;
+    private float _nextFire ;
     
     [SerializeField]
     private float _player_top_max = 0f;
@@ -137,7 +137,7 @@ public class Player : MonoBehaviour
                                                 // Debug.Log("Space key pressed!!!");
                                                 //Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
 
-        if (_tripleShotActive)      // Is triple shot active? challenge 9-62 
+         if (_tripleShotActive)      // Is triple shot active? challenge 9-62 
         {
             // if triple shot, instantiate triple shot prefab
             // otherwise just fire 1 laser
