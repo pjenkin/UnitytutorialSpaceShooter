@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
     {
         // if other (collider) is a Player
         //if (other.transform.name == "Player")
-        if (other.tag == "Player")
+         if (other.tag == "Player")
         {
             // other.transform.GetComponent<Player>().Damage();    // 6-47 Player lives--/damage sustained by GetComponent generic - unsafe with no null check
             Player player = other.transform.GetComponent<Player>();

@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     private float _speed = 3.5f;
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private GameObject _tripleShotLaserPrefab;      // 8-62 triple shot prefab (must be serializable so as to drag&drop to Player in Inspector)
     private float _laser_spawn_offset = 1.05f;       // 8-59 laser 3d to 2d - was 0.8 when 3d
     [SerializeField]
     private float _fireRate = 0.5f;
@@ -29,6 +31,8 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;  // 7-54 the (script) component of the SpawnManager game object
 
+    [SerializeField]
+    private bool _tripleShotActive = false;  // Is triple shot active? challenge 9-62 
 
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
@@ -130,12 +134,24 @@ public class Player : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.Space) && Time.time > _nextFire)        // 5-31 Instantiating 'laser' object & 5-37 'Cooling-down' system
         //{
             _nextFire = Time.time + _fireRate;  // 5-37 Cooling-Down system - set next time at which it'll be possible to fire
-            // Debug.Log("Space key pressed!!!");
-            //Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
+                                                // Debug.Log("Space key pressed!!!");
+                                                //Instantiate(_laserPrefab,transform.position, Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
+
+        if (_tripleShotActive)      // Is triple shot active? challenge 9-62 
+        {
+            // if triple shot, instantiate triple shot prefab
+            // otherwise just fire 1 laser
+            Instantiate(_tripleShotLaserPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
+        }
+        else
+        {
             // 5-36 offset laser object's instantiation position to avoid clipping Player primitive
             Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + _laser_spawn_offset, transform.position.z), Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
-        //}
+            }                                                                                                                                                                   //}
     }
+
+
+
 
     public void Damage()        // 6-47 Player lives/damage NB public so as to be accssible from Enemy
     {
