@@ -168,4 +168,9 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    public void TripleShot()    // 9-64 Triple shot powerup behaviour
+    {
+        _tripleShotActive = true;
+    }
 }
