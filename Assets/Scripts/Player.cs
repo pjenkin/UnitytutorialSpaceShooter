@@ -34,6 +34,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool _tripleShotActive = false;  // Is triple shot active? challenge 9-62 
 
+    [SerializeField]
+    private float TripleShotPowerUpDuration = 5f;
+
+
+    private IEnumerator _tripleShotCoroutine;
+
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
 
@@ -147,7 +153,7 @@ public class Player : MonoBehaviour
         {
             // 5-36 offset laser object's instantiation position to avoid clipping Player primitive
             Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + _laser_spawn_offset, transform.position.z), Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
-            }                                                                                                                                                                   //}
+        }                                                                                                                                                                   //}
     }
 
 
@@ -172,5 +178,18 @@ public class Player : MonoBehaviour
     public void TripleShot()    // 9-64 Triple shot powerup behaviour
     {
         _tripleShotActive = true;
+        _tripleShotCoroutine = TripleShotPowerDownRoutine(TripleShotPowerUpDuration);
+        StartCoroutine(_tripleShotCoroutine);
+        // StartCoroutine(TripleShotPowerDownRoutine()); // could do this?
+    }
+
+
+    IEnumerator TripleShotPowerDownRoutine(float duration = 5f)      // 9-66 3-shot powerdown implementation
+    {
+        while (true)
+        {            
+            yield return new WaitForSeconds(duration);
+            _tripleShotActive = false;  // statement *after* the yield return, sensibly enough (or not) 9-67
+        }
     }
 }

@@ -368,6 +368,7 @@ MonoBehaviour:
   _player_right_side_max: 8.5
   _lives: 3
   _tripleShotActive: 0
+  TripleShotPowerUpDuration: 5
   horizontalInputDemo: 0
 --- !u!61 &557828404
 BoxCollider2D:
@@ -573,12 +574,12 @@ PrefabInstance:
     - target: {fileID: 4477421774984780809, guid: 7be7515c2810d284da514fc1fc0ba7c8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.04
       objectReference: {fileID: 0}
     - target: {fileID: 4477421774984780809, guid: 7be7515c2810d284da514fc1fc0ba7c8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.48
       objectReference: {fileID: 0}
     - target: {fileID: 4477421774984780809, guid: 7be7515c2810d284da514fc1fc0ba7c8,
         type: 3}
