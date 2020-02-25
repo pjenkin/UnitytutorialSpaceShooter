@@ -25,9 +25,12 @@ public class Laser : MonoBehaviour
         transform.Translate(Vector3.up * _speed * Time.deltaTime);  // 5-32 Laser behaviour (movement upward)
         if (transform.position.y >= _screen_top) // 5-34 destroy laser objects at top of screen challenge
         {
+            Destroy(this.gameObject.transform.parent?.gameObject);   // 9-68 Destroy parent object too, if object has a parent
             Destroy(this.gameObject);
             // NB not just Destroy(this);!
             // could have been Destroy(gameObject) or on a timer (e.g.)
+            
+            
         }
     }
 }
