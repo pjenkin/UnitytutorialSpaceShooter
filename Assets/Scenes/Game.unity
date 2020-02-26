@@ -450,6 +450,31 @@ MonoBehaviour:
   _enemy_random_x_pos: 0
   _enemy_position: {x: 0, y: 0, z: 0}
   _spawn_interval: 5
+--- !u!1 &1037591342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4477421774984780804, guid: 7be7515c2810d284da514fc1fc0ba7c8,
+    type: 3}
+  m_PrefabInstance: {fileID: 4477421774629256066}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1037591343
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1037591342}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 739dc7d9b7a568f41a9dc71a662a8e77, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1193007964
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,12 +599,12 @@ PrefabInstance:
     - target: {fileID: 4477421774984780809, guid: 7be7515c2810d284da514fc1fc0ba7c8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.04
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4477421774984780809, guid: 7be7515c2810d284da514fc1fc0ba7c8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.48
+      value: 4.87
       objectReference: {fileID: 0}
     - target: {fileID: 4477421774984780809, guid: 7be7515c2810d284da514fc1fc0ba7c8,
         type: 3}
