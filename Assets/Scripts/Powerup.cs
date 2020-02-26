@@ -30,6 +30,7 @@ public class Powerup : MonoBehaviour
         transform.Translate(Vector3.down * _speed * Time.deltaTime);   // move down at speed
         if (transform.position.y <= _powerup_bottom_max)   // destory this object when bottom reached
         {
+            Destroy(this.gameObject.transform.parent?.gameObject);   // 9-68 Destroy parent object too, if object has a parent
             Destroy(this.gameObject);
         }
     }
@@ -41,6 +42,9 @@ public class Powerup : MonoBehaviour
             Player player = collision.transform.GetComponent<Player>();    // get the Player object's Player script component
 
             player?.TripleShot();
+
+            Destroy(this.gameObject.transform.parent?.gameObject);   // 9-68 Destroy parent object too, if object has a parent
+            Destroy(this.gameObject);
         }
     }
 
