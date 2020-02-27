@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -192,4 +193,15 @@ public class Player : MonoBehaviour
             _tripleShotActive = false;  // statement *after* the yield return, sensibly enough (or not) 9-67
         }
     }
+
+
+    internal void Shields()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal void Speed()
+    {
+    }
+
 }

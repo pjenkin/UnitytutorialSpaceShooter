@@ -5,6 +5,14 @@ using UnityEngine;
 public class Powerup : MonoBehaviour
 {
 
+    // ID for powerups - 10-75 Modular powerup script
+    // 0 fr TripleShot
+    // 1 for Speed
+    // 2 for Shields
+    [SerializeField]
+    private int powerupID;  // to set in Inspector, for each powerup prefab type
+
+
     [SerializeField]
     private float _speed = 4.0f;
     [SerializeField]
@@ -41,7 +49,24 @@ public class Powerup : MonoBehaviour
         {
             Player player = collision.transform.GetComponent<Player>();    // get the Player object's Player script component
 
-            player?.TripleShot();
+            switch(powerupID)
+            {
+                case 0:
+                    player?.TripleShot();
+                    Debug.Log("Triple shot boost collected");
+                    break;
+                case 1:
+                    player?.Speed();
+                    Debug.Log("Speed boost collected");
+                    break;
+                case 2:
+                    player?.Shields();
+                    Debug.Log("Shields boost collected");
+                    break;
+                default:
+                    break;
+            }
+
 
             Destroy(this.gameObject.transform.parent?.gameObject);   // 9-68 Destroy parent object too, if object has a parent
             Destroy(this.gameObject);
