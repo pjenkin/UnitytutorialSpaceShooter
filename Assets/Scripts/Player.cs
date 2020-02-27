@@ -34,12 +34,17 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private bool _tripleShotActive = false;  // Is triple shot active? challenge 9-62 
+    [SerializeField]
+    private bool _speedActive = false;  // Is speed powerup active? challenge 10-78
 
     [SerializeField]
     private float TripleShotPowerUpDuration = 5f;
-
+    [SerializeField]
+    private float SpeedPowerUpDuration = 5f;
 
     private IEnumerator _tripleShotCoroutine;
+    private IEnumerator _speedCoroutine;
+
 
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
@@ -73,6 +78,16 @@ public class Player : MonoBehaviour
     // 4-26 Code Cleanup i.e. refactoring to a new method
     void CalculateMovement()
     {
+        // 10-78 Speed boost implementation - not sure recalculation in this way is efficient, but never mind
+        if (_speedActive)
+        {
+            _speed = 8.5f;
+        }
+        else
+        {
+            _speed = 5f;
+        }
+
         float horizontalInput = Input.GetAxis("Horizontal");        //transform.Translate(Vector3.right); // constant rapid move right-ward
         float verticalInput = Input.GetAxis("Vertical");        //transform.Translate(Vector3.right); // constant rapid move right-ward
 
@@ -200,8 +215,18 @@ public class Player : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    internal void Speed()
+    internal void Speed()       // 10-78 Speed boost powerup implementation
     {
+        _speedActive = true;
+        _speedCoroutine = SpeedPowerDownRoutine(SpeedPowerUpDuration);
+        StartCoroutine(_speedCoroutine);
+        Debug.Log("Speed powered up");
     }
 
+    IEnumerator SpeedPowerDownRoutine(float duration = 5f)
+    {
+        yield return new WaitForSeconds(duration);
+        _speedActive = false;
+        Debug.Log("Speed powered down");
+    }
 }

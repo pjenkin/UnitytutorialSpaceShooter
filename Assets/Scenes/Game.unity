@@ -368,7 +368,9 @@ MonoBehaviour:
   _player_right_side_max: 8.5
   _lives: 3
   _tripleShotActive: 0
+  _speedActive: 0
   TripleShotPowerUpDuration: 5
+  SpeedPowerUpDuration: 5
   horizontalInputDemo: 0
 --- !u!61 &557828404
 BoxCollider2D:
@@ -396,6 +398,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.3791482, y: 5.12}
   m_EdgeRadius: 0
+--- !u!1 &615492884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 615492885}
+  m_Layer: 0
+  m_Name: SpeedContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &615492885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615492884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1032974574}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1032974573
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +458,7 @@ Transform:
   m_Children:
   - {fileID: 1193007965}
   - {fileID: 1067479331}
+  - {fileID: 615492885}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -443,6 +476,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyContainer: {fileID: 1193007964}
   _tripleshotContainer: {fileID: 1067479330}
+  _speedContainer: {fileID: 0}
   _enemyPrefab: {fileID: 772923326162145244, guid: 18aa22b1612439b439cf2077df1a5111,
     type: 3}
   _enemy_bottom_max: -3.8
@@ -454,14 +488,19 @@ MonoBehaviour:
   _spawn_interval: 5
   _tripleshotPrefab: {fileID: 4477421774984780804, guid: 7be7515c2810d284da514fc1fc0ba7c8,
     type: 3}
-  _tripleshot_bottom_max: -3.8
-  _tripleshot_top_max: 3.8
-  _tripleshot_left_side_max: -8.5
-  _tripleshot_right_side_max: 8.5
-  _tripleshot_random_x_pos: 0
+  _powerup_bottom_max: -3.8
+  _powerup_top_max: 3.8
+  _powerup_left_side_max: -8.5
+  _powerup_right_side_max: 8.5
+  _powerup_random_x_pos: 0
   _tripleshot_position: {x: 0, y: 0, z: 0}
   _tripleshot_spawn_interval_min: 3
   _tripleshot_spawn_interval_max: 7
+  _speedPrefab: {fileID: 6745597584873059588, guid: 079b67f09640be34389c322885eee868,
+    type: 3}
+  _speed_position: {x: 0, y: 0, z: 0}
+  _speed_spawn_interval_min: 3
+  _speed_spawn_interval_max: 7
 --- !u!1 &1067479330
 GameObject:
   m_ObjectHideFlags: 0
