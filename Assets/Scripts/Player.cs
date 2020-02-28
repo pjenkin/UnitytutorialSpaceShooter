@@ -13,9 +13,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _tripleShotLaserPrefab;      // 8-62 triple shot prefab (must be serializable so as to drag&drop to Player in Inspector)
     private float _laser_spawn_offset = 1.05f;       // 8-59 laser 3d to 2d - was 0.8 when 3d
+
     [SerializeField]
     private float _fireRate = 0.5f;
-    private float _nextFire ;
+    private float _nextFire;
     
     [SerializeField]
     private float _player_top_max = 0f;
@@ -29,6 +30,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private int _lives = 3;
+
+    
+    [SerializeField]
+    private int _score;     // 12-94 score implementation (cf UIManager)
 
     private SpawnManager _spawnManager;  // 7-54 the (script) component of the SpawnManager game object
 
@@ -246,4 +251,25 @@ public class Player : MonoBehaviour
         _speedActive = false;
         Debug.Log("Speed powered down");
     }
+
+    /// <summary>
+    /// Add to the Player's score - 12-94 Score implementation
+    /// </summary>
+    /// <param name="score"></param>
+    /// <returns></returns>
+    public int AddScore(int score)
+    {
+        _score += score;    // 12-94 Score implementation
+        return _score;
+    }
+
+    /// <summary>
+    /// Return the Player's score as a string
+    /// </summary>
+    /// <returns></returns>
+    public string GetScore()
+    {
+        return _score.ToString();
+    }
+
 }

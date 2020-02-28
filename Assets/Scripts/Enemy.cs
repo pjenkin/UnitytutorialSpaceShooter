@@ -65,6 +65,9 @@ public class Enemy : MonoBehaviour
         {
             // Destroy the laser
             Destroy(other.gameObject);
+            // Add 10 to the Player's score
+            Player player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();
+            player?.AddScore(10);       // 12-94 Score implementation
             // then Destroy this (the Enemy)
             Destroy(this.gameObject);
             Debug.Log("Hit with: " + other.transform.name); // 6-45
