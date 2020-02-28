@@ -49,7 +49,7 @@ public class Powerup : MonoBehaviour
         {
             Player player = collision.transform.GetComponent<Player>();    // get the Player object's Player script component
 
-            switch(powerupID)
+             switch(powerupID)
             {
                 case 0:
                     player?.TripleShot();

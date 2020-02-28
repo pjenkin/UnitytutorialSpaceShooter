@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager class/(actually empty GameObject in hierarchy)
 {
+    
     // 7-53 Tidying up spawning (in hierarchy, via container object)
     [SerializeField]
-    private GameObject _enemyContainer;
+    private GameObject _enemyContainer;    
     [SerializeField]
     private GameObject _tripleshotContainer;    // 9-71 (need to make new empty container & drag & drop this to poperty too)
     [SerializeField]
     private GameObject _speedContainer;    // 10-78 (need to make new empty container & drag & drop this to poperty too)
 
+    [SerializeField]                   // *must* be serialized, so as to be able to drag&drop Prefab to this field in Inspector 7-51
+    public GameObject _enemyPrefab;    // this must be manually dragged from the Prefabs folder to this field in the Inspector (NB public also?)
+    [SerializeField]    // 10-80 Spawning speed boost - array for any powerup (to easily randomise)
+    private GameObject[] powerups;
+
 
     // 7-51 Challenge: Spawn Routine
-    [SerializeField]                   // *must* be serialized, so as to be able to drag&drop Prefab to this field in Inspector
-    public GameObject _enemyPrefab;    // this must be manually dragged from the Prefabs folder to this field in the Inspector (NB public also?)
     [SerializeField]
     private float _enemy_bottom_max = -3.8f;
     [SerializeField]
@@ -32,8 +36,10 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
     private float _spawn_interval = 5f;
 
     // 9-72 Tripleup spawn routine
+    /*
     [SerializeField]                   // *must* be serialized, so as to be able to drag&drop Prefab to this field in Inspector
     public GameObject _tripleshotPrefab;    // this must be manually dragged from the Prefabs folder to this field in the Inspector (NB public also?)
+    */
     [SerializeField]
     private float _powerup_bottom_max = -3.8f;
     [SerializeField]
@@ -51,9 +57,10 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
     [SerializeField]
     private float _tripleshot_spawn_interval_max = 7f;
 
-
+    /*
     [SerializeField]
     public GameObject _speedPrefab;             // 10-78 Speed boost implementation
+    */
     [SerializeField]
     private Vector3 _speed_position;        // do not initialise start position yet, for the mo
     [SerializeField]
@@ -62,8 +69,8 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
     private float _speed_spawn_interval_max = 7f;
 
     private IEnumerator _spawn_enemy_coroutine;          // declare a coroutine of type IEnumerator (which can be yield'd?)
-    private IEnumerator _spawn_tripleshot_coroutine;    // 9-71 declare a coroutine of type IEnumerator (which can be yield'd?) for tripleshots
-    private IEnumerator _spawn_speed_coroutine;
+    private IEnumerator _spawn_powerup_coroutine;    // 9-71 declare a coroutine of type IEnumerator (which can be yield'd?) for tripleshots
+    // private IEnumerator _spawn_speed_coroutine;
     private bool _stopSpawning = false;      // 7-54 stop spawning on player death
 
 
@@ -74,10 +81,12 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
         _spawn_enemy_coroutine = SpawnEnemyRoutine(_spawn_interval);
         StartCoroutine(_spawn_enemy_coroutine);         // run the Spawning method of the SpawnManager every 5 seconds e.g.
         // NB could have used a string as the name of the coroutine routine
-        _spawn_tripleshot_coroutine = SpawnTripleShotPowerupRoutine(_tripleshot_spawn_interval_min);      // 9-71 Spawning tripleshot powerup
-        StartCoroutine(_spawn_tripleshot_coroutine);
+        _spawn_powerup_coroutine = SpawnPowerupRoutine(_tripleshot_spawn_interval_min);      // 9-71 Spawning tripleshot powerup
+        StartCoroutine(_spawn_powerup_coroutine);
+        /*
         _spawn_speed_coroutine = SpawnSpeedPowerupRoutine(_speed_spawn_interval_min);
         StartCoroutine(_spawn_speed_coroutine);
+        */
     }
 
     // Update is called once per frame
@@ -109,20 +118,29 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
         }
     }
 
-    IEnumerator SpawnTripleShotPowerupRoutine(float interval = 3f)
+    /// SpawnPowerupRoutine: To spawn a random power up (of whatever kind) at intervals
+    /// 
+    IEnumerator SpawnPowerupRoutine(float interval = 3f)
     {
         // 9-71 Spawn tripleshot powerup every 3-7 seconds
         while (!_stopSpawning)
         {
+            int randomPowerUp = Random.Range(0,2);      // 10-80 NB Random.Range up to max *exclusive* (so 1 more than wanted)
+
             _powerup_random_x_pos = Random.Range(_powerup_left_side_max, _powerup_right_side_max);
 
             _tripleshot_position = new Vector3(_powerup_random_x_pos, _powerup_top_max, 0);
+            /* 
             GameObject newTripleShot = Instantiate(_tripleshotPrefab, _tripleshot_position, Quaternion.identity);
 
             if (newTripleShot.transform.parent != null)
             {
                 newTripleShot.transform.parent = _tripleshotContainer.transform;
             }
+            */
+            // GameObject newTripleShot = Instantiate(powerups[0], _tripleshot_position, Quaternion.identity);     // 10-80 just checking to see array working
+
+            GameObject newTripleShot = Instantiate(powerups[randomPowerUp], _tripleshot_position, Quaternion.identity);     // 10-80 just checking to see array working
 
             yield return new WaitForSeconds(Random.Range(_tripleshot_spawn_interval_min, _tripleshot_spawn_interval_max));
         }
@@ -135,13 +153,16 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
         {
             _powerup_random_x_pos = Random.Range(_powerup_left_side_max, _powerup_right_side_max);
             _speed_position = new Vector3(_powerup_random_x_pos, _powerup_top_max, 0);
+            
+            /*
             GameObject newSpeed = Instantiate(_speedPrefab, _speed_position, Quaternion.identity);
 
             if (newSpeed.transform.parent != null)
             {
                 newSpeed.transform.parent = _speedContainer.transform;
             }
-            
+            */
+
             yield return new WaitForSeconds(Random.Range(_speed_spawn_interval_min, _speed_spawn_interval_max));
         }
     }
