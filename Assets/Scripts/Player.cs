@@ -32,10 +32,13 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;  // 7-54 the (script) component of the SpawnManager game object
 
-    [SerializeField]
+    //[SerializeField]
     private bool _tripleShotActive = false;  // Is triple shot active? challenge 9-62 
-    [SerializeField]
-    private bool _speedActive = false;  // Is speed powerup active? challenge 10-78
+    //[SerializeField]
+    private bool _speedActive = false;      // Is speed powerup active? challenge 10-78
+    //[SerializeField]
+    private bool _shieldActive;             // Is shield powerup active? challenge 11-87
+
 
     [SerializeField]
     private float TripleShotPowerUpDuration = 5f;
@@ -177,6 +180,14 @@ public class Player : MonoBehaviour
 
     public void Damage()        // 6-47 Player lives/damage NB public so as to be accssible from Enemy
     {
+        if (_shieldActive)  // 11-87 shields behaviour
+        {
+            _shieldActive = false;  // deactivate shield - used up by impact
+            // stop showing shield graphic?
+            Debug.Log("Shield struck instead of player");
+            return;                 // quite damage method without sustaining damage
+        }
+
         _lives--;
 
         // check if Player dead - destroy Player if so
@@ -209,10 +220,16 @@ public class Player : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Shields - to implement Shield powerup behaviour
+    /// </summary>
     internal void Shields()
     {
-        throw new NotImplementedException();
+        //throw new NotImplementedException();
+        // NB no power-down needed here
+        // 11-87 Shields behaviour
+        _shieldActive = true;   // set flag to show damage should be soaked up 
+        // and a shield graphic should be shown
     }
 
     internal void Speed()       // 10-78 Speed boost powerup implementation

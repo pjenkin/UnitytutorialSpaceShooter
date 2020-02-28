@@ -125,7 +125,7 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
         // 9-71 Spawn tripleshot powerup every 3-7 seconds
         while (!_stopSpawning)
         {
-            int randomPowerUp = Random.Range(0,2);      // 10-80 NB Random.Range up to max *exclusive* (so 1 more than wanted)
+            int randomPowerUp = Random.Range(0, powerups.Length);      // 10-80 NB Random.Range up to max *exclusive* (so 1 more than wanted) 11-86 use fully populated array length
 
             _powerup_random_x_pos = Random.Range(_powerup_left_side_max, _powerup_right_side_max);
 
