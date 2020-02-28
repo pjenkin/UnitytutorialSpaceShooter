@@ -479,6 +479,10 @@ MonoBehaviour:
   _speedContainer: {fileID: 0}
   _enemyPrefab: {fileID: 772923326162145244, guid: 18aa22b1612439b439cf2077df1a5111,
     type: 3}
+  powerups:
+  - {fileID: 4477421774984780804, guid: 7be7515c2810d284da514fc1fc0ba7c8, type: 3}
+  - {fileID: 6745597584873059588, guid: 079b67f09640be34389c322885eee868, type: 3}
+  - {fileID: 0}
   _enemy_bottom_max: -3.8
   _enemy_top_max: 3.8
   _enemy_left_side_max: -8.5
@@ -486,8 +490,6 @@ MonoBehaviour:
   _enemy_random_x_pos: 0
   _enemy_position: {x: 0, y: 0, z: 0}
   _spawn_interval: 5
-  _tripleshotPrefab: {fileID: 4477421774984780804, guid: 7be7515c2810d284da514fc1fc0ba7c8,
-    type: 3}
   _powerup_bottom_max: -3.8
   _powerup_top_max: 3.8
   _powerup_left_side_max: -8.5
@@ -496,8 +498,6 @@ MonoBehaviour:
   _tripleshot_position: {x: 0, y: 0, z: 0}
   _tripleshot_spawn_interval_min: 3
   _tripleshot_spawn_interval_max: 7
-  _speedPrefab: {fileID: 6745597584873059588, guid: 079b67f09640be34389c322885eee868,
-    type: 3}
   _speed_position: {x: 0, y: 0, z: 0}
   _speed_spawn_interval_min: 3
   _speed_spawn_interval_max: 7
