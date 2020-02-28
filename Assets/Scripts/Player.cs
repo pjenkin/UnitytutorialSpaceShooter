@@ -183,7 +183,7 @@ public class Player : MonoBehaviour
         if (_shieldActive)  // 11-87 shields behaviour
         {
             _shieldActive = false;  // deactivate shield - used up by impact
-            // stop showing shield graphic?
+            this.transform.GetChild(0).transform.gameObject.SetActive(false);   // stop showing shield graphic?
             Debug.Log("Shield struck instead of player");
             return;                 // quite damage method without sustaining damage
         }
@@ -229,7 +229,7 @@ public class Player : MonoBehaviour
         // NB no power-down needed here
         // 11-87 Shields behaviour
         _shieldActive = true;   // set flag to show damage should be soaked up 
-        // and a shield graphic should be shown
+        this.transform.GetChild(0).gameObject.SetActive(true);        // ... and the shield graphic (Player's 1st child object) should be shown
     }
 
     internal void Speed()       // 10-78 Speed boost powerup implementation
