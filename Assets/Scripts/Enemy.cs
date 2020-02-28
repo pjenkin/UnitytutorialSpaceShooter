@@ -17,12 +17,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private float _enemy_random_x_pos = 0f;
 
+    Player player;      // us, the enemy's foe! 12-95 Score implementation (review)
+
     // private Random _rand;       // System.Random not needed, and this would be Unity.Random (can use abstract)
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();    // move this to start
     }
 
     // Update is called once per frame
@@ -66,8 +68,8 @@ public class Enemy : MonoBehaviour
             // Destroy the laser
             Destroy(other.gameObject);
             // Add 10 to the Player's score
-            Player player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();
-            player?.AddScore(10);       // 12-94 Score implementation
+            // Player player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();    // move this to start
+             player?.AddScore(10);       // 12-94 Score implementation
             // then Destroy this (the Enemy)
             Destroy(this.gameObject);
             Debug.Log("Hit with: " + other.transform.name); // 6-45
