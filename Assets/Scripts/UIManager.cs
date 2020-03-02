@@ -9,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _scoreText; // Text (Canvas child object) needing UnityEngine.UI        
     private Player player;
+    [SerializeField]
+    private Text _gameOverText;     // 12-97 Game over text (need to drag&drop in Inspector to populate this)
     
     [SerializeField]
     private Image _LivesImg;
@@ -38,5 +40,13 @@ public class UIManager : MonoBehaviour
         // display the image sprite
         // change image sprite for lives based on the currentLives index
         _LivesImg.sprite = _livesSprites[currentLives];
+    }
+
+    /// <summary>
+    /// 12-97 Game Over text - display text
+    /// </summary>
+    public void DisplayGameOver()
+    {
+        _gameOverText.gameObject.SetActive(true);       // or possibly .enabled?
     }
 }

@@ -201,6 +201,11 @@ public class Player : MonoBehaviour
 
         _uiManager.UpdateLives(_lives);     // 12-96 lives display
 
+        if (_lives == 0)   // 12-97 Game Over
+        {
+            _uiManager.DisplayGameOver();
+        }
+
         // check if Player dead - destroy Player if so
         if (_lives < 1)
         {
