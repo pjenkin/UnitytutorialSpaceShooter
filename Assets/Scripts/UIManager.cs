@@ -40,6 +40,13 @@ public class UIManager : MonoBehaviour
         // display the image sprite
         // change image sprite for lives based on the currentLives index
         _LivesImg.sprite = _livesSprites[currentLives];
+
+        if (currentLives == 0)   // 12-97 Game Over
+        {
+            DisplayGameOver();
+            StartCoroutine(GameOverFlickerRoutine());   // 12-100 blink text
+        }
+
     }
 
     /// <summary>
@@ -48,5 +55,18 @@ public class UIManager : MonoBehaviour
     public void DisplayGameOver()
     {
         _gameOverText.gameObject.SetActive(true);       // or possibly .enabled?
+    }
+
+    // 12-100 Game Over text flicker/blink
+    IEnumerator GameOverFlickerRoutine()
+    {
+        while (true)
+        {
+            _gameOverText.text = "GAME OVER!!!";
+            yield return new WaitForSeconds(0.5f);
+            _gameOverText.text = "";
+            yield return new WaitForSeconds(0.5f);
+            // but - why???
+        }
     }
 }
