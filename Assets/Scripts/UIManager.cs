@@ -10,6 +10,11 @@ public class UIManager : MonoBehaviour
     private Text _scoreText; // Text (Canvas child object) needing UnityEngine.UI        
     private Player player;
     
+    [SerializeField]
+    private Image _LivesImg;
+    [SerializeField]
+    private Sprite[] _livesSprites;  // 12-96 Lives display NB UnityEngine.Sprite
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,5 +27,16 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         _scoreText.text = $"Score: {player?.GetScore()}";
+    }
+
+    /// <summary>
+    /// 12-96 Lives display, to be called from Player.Damage
+    /// </summary>
+    /// <param name="currentLives"></param>
+    public void UpdateLives(int currentLives)
+    {
+        // display the image sprite
+        // change image sprite for lives based on the currentLives index
+        _LivesImg.sprite = _livesSprites[currentLives];
     }
 }

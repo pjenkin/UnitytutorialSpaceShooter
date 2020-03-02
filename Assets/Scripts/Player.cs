@@ -35,7 +35,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private int _score;     // 12-94 score implementation (cf UIManager)
 
-    private SpawnManager _spawnManager;  // 7-54 the (script) component of the SpawnManager game object
+    private SpawnManager _spawnManager;  // 7-54 The (script) component of the SpawnManager game object
+
+    private UIManager _uiManager;       // 12-96 Lives display, or before
 
     //[SerializeField]
     private bool _tripleShotActive = false;  // Is triple shot active? challenge 9-62 
@@ -71,6 +73,8 @@ public class Player : MonoBehaviour
         //Player player = new Player();
         // player.transform
         // take the current position and assign to it a start position - snap to zero 0,0,0
+
+        _uiManager = GameObject.Find("UI_Manager").transform.GetComponent<UIManager>();     // 12-96 Lives display, or before
     }
 
     // Update is called once per frame
@@ -194,6 +198,8 @@ public class Player : MonoBehaviour
         }
 
         _lives--;
+
+        _uiManager.UpdateLives(_lives);     // 12-96 lives display
 
         // check if Player dead - destroy Player if so
         if (_lives < 1)
