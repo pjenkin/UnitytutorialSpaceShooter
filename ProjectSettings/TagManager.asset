@@ -8,6 +8,11 @@ TagManager:
   - Enemy
   - EnemyContainer
   - TripleShot
+  - Game_Manager
+  - Score_text
+  - Lives_display_img
+  - Game_Over_text
+  - Restart_text
   layers:
   - Default
   - TransparentFX

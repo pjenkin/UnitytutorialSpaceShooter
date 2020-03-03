@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;  // 7-54 The (script) component of the SpawnManager game object
 
     private UIManager _uiManager;       // 12-96 Lives display, or before
+
+    private GameManager _gameManager;        // 12-102 R key to restart level
 
     //[SerializeField]
     private bool _tripleShotActive = false;  // Is triple shot active? challenge 9-62 
@@ -85,6 +88,7 @@ public class Player : MonoBehaviour
         {
             FireLaser();            // cf Cleanup sections for refactoring
         }
+
     }
 
     // 4-26 Code Cleanup i.e. refactoring to a new method
@@ -204,6 +208,8 @@ public class Player : MonoBehaviour
         // check if Player dead - destroy Player if so
         if (_lives < 1)
         {
+            _uiManager.GameOverSequence();  // 12-102 R key to restart level
+
             _spawnManager?.OnPlayerDeath();  // 7-54 Communicate with spawn manager (and null check)
             if (_spawnManager == null)
             {
