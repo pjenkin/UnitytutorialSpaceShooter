@@ -19,12 +19,20 @@ public class Enemy : MonoBehaviour
 
     Player _player;      // us, the enemy's foe! 12-95 Score implementation (review)
 
+    Animator _anim;    // 13-106 Enemy explosion implementation
+
     // private Random _rand;       // System.Random not needed, and this would be Unity.Random (can use abstract)
 
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();    // move this to start
+        if (_player == null)
+        {
+            Debug.Log("_player null");      // could be a test
+        }
+
+        _anim = GetComponent<Animator>();        // 13-106 Enemy explosion implementation (this.transform not needed)
     }
 
     // Update is called once per frame
@@ -58,7 +66,9 @@ public class Enemy : MonoBehaviour
             player?.Damage(); // damage the player (6-47) Player lives--/damage sustained
 
             // then Destroy this (the Enemy)
-            Destroy(this.gameObject);
+            ExplosionAnim();                // 13-106 Enemy explosion implementation
+            _speed = 0;                             // Stop Enemy in its tracks to avoid continuing & hitting Player
+            Destroy(this.gameObject, 2.4f);       // Delay for explosion animation 13-106
             Debug.Log("Hit with: " + other.transform.name); // 6-45
         }
         // if other (collider) is a Laser
@@ -69,10 +79,28 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
             // Add 10 to the Player's score
             // Player player = GameObject.FindGameObjectWithTag("Player").transform.GetComponent<Player>();    // move this to start
-             _player?.AddScore(10);       // 12-94 Score implementation
+             _player?.AddScore(10);         // 12-94 Score implementation
             // then Destroy this (the Enemy)
-            Destroy(this.gameObject);
+            ExplosionAnim();                // 13-106 Enemy explosion implementation
+            _speed = 0;                             // Stop Enemy in its tracks
+            Destroy(this.gameObject, 2.4f);   // Delay for explosion animation 13-106
             Debug.Log("Hit with: " + other.transform.name); // 6-45
         }
     }
+
+    /// <summary>
+    /// Run enemy explosion animation
+    /// 13-106 Enemy explosion implementation
+    /// </summary>
+    public void ExplosionAnim()
+    {
+        _anim.SetTrigger("OnEnemyDestroy");
+    }
 }
+
+// instart, null check for player
+// instart, assign the animator component to Anim
+
+// handle to animator component
+// access the Animator component, 
+// trigger animation on both/all impacts
