@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
 
     Animator _anim;    // 13-106 Enemy explosion implementation
 
+    AudioManager _audioManager;     // my take on 15-122 Explosion sound audio
+
     // private Random _rand;       // System.Random not needed, and this would be Unity.Random (can use abstract)
 
     // Start is called before the first frame update
@@ -33,6 +35,13 @@ public class Enemy : MonoBehaviour
         }
 
         _anim = GetComponent<Animator>();        // 13-106 Enemy explosion implementation (this.transform not needed)
+
+        _audioManager = GameObject.Find("Audio_Manager")?.transform.GetComponent<AudioManager>();        // my take on 15-122 Explosion sound
+        if (_audioManager == null)
+        {
+            Debug.LogError("_audioManager is null");
+        }
+
     }
 
     // Update is called once per frame
@@ -67,6 +76,7 @@ public class Enemy : MonoBehaviour
 
             // then Destroy this (the Enemy)
             ExplosionAnim();                // 13-106 Enemy explosion implementation
+            _audioManager.PlayExplosion();  // my take on 15-122 Explosion sound audio
             _speed = 0;                             // Stop Enemy in its tracks to avoid continuing & hitting Player
             Destroy(this.gameObject, 2.4f);       // Delay for explosion animation 13-106
             Debug.Log("Hit with: " + other.transform.name); // 6-45
@@ -82,6 +92,7 @@ public class Enemy : MonoBehaviour
              _player?.AddScore(10);         // 12-94 Score implementation
             // then Destroy this (the Enemy)
             ExplosionAnim();                // 13-106 Enemy explosion implementation
+            _audioManager.PlayExplosion();  // my take on 15-122 Explosion sound audio
             _speed = 0;                             // Stop Enemy in its tracks
             Destroy(this.gameObject, 2.4f);   // Delay for explosion animation 13-106
             Debug.Log("Hit with: " + other.transform.name); // 6-45

@@ -42,6 +42,8 @@ public class Player : MonoBehaviour
 
     private GameManager _gameManager;        // 12-102 R key to restart level
 
+    private AudioManager _audioManager;     // my take on 15-122 Explosion sound
+
     //[SerializeField]
     private bool _tripleShotActive = false;  // Is triple shot active? challenge 9-62 
     //[SerializeField]
@@ -67,6 +69,7 @@ public class Player : MonoBehaviour
     //AudioClip _laserAudio;
     [SerializeField]                // 15-120 Laser shot sound audio (drag & drop to populate)
     AudioSource _laserAudio;
+    
 
 
     // for demo purposes check horizontal input
@@ -95,6 +98,13 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Laser_audio is null");
         }
+
+        _audioManager = GameObject.Find("Audio_Manager")?.transform.GetComponent<AudioManager>();        // my take on 15-122 Explosion sound
+        if (_audioManager == null)
+        {
+            Debug.LogError("_audioManager is null");
+        }
+
     }
 
     // Update is called once per frame
@@ -229,7 +239,7 @@ public class Player : MonoBehaviour
         if (_lives < 1)
         {
             _uiManager.GameOverSequence();  // 12-102 R key to restart level
-
+            _audioManager.PlayExplosion();  // my take on 15-122 Explosion sound audio
             _spawnManager?.OnPlayerDeath();  // 7-54 Communicate with spawn manager (and null check)
             if (_spawnManager == null)
             {
