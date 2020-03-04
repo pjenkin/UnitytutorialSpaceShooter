@@ -58,6 +58,13 @@ public class Player : MonoBehaviour
     private IEnumerator _tripleShotCoroutine;
     private IEnumerator _speedCoroutine;
 
+    // 13-114 Player damage visualisation graphics
+    [SerializeField]
+    GameObject _rightEngineFire;
+    [SerializeField]
+    GameObject _leftEngineFire;
+    
+
 
     // for demo purposes check horizontal input
     public float horizontalInputDemo;
@@ -203,6 +210,8 @@ public class Player : MonoBehaviour
 
         _lives--;
 
+        DamageVisualisation();              // 13-114 Player damage visualisation
+
         _uiManager.UpdateLives(_lives);     // 12-96 lives display
 
         // check if Player dead - destroy Player if so
@@ -283,5 +292,31 @@ public class Player : MonoBehaviour
     {
         return _score.ToString();
     }
+
+    public void DamageVisualisation()
+    {
+        // check lives
+        // if lives is 2, enable right engine (or some engine)
+        // if lives is 1, enable left engine
+        if (_lives == 2)        // set a random side engine afire if 2 lives left
+        {
+            if (UnityEngine.Random.Range(1, 2) == 1)
+            {
+                this._rightEngineFire.SetActive(true);
+                this._leftEngineFire.SetActive(false);
+            }
+            else
+            {
+                this._rightEngineFire.SetActive(true);
+                this._leftEngineFire.SetActive(false);
+            }
+        }
+        else if (_lives == 1)       // set both engines afire if only 1 life left
+        {
+            this._rightEngineFire.SetActive(true);
+            this._leftEngineFire.SetActive(true);
+        }
+    }
+
 
 }
