@@ -13,6 +13,7 @@ TagManager:
   - Lives_display_img
   - Game_Over_text
   - Restart_text
+  - LaserAudio
   layers:
   - Default
   - TransparentFX

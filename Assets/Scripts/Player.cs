@@ -63,7 +63,10 @@ public class Player : MonoBehaviour
     GameObject _rightEngineFire;
     [SerializeField]
     GameObject _leftEngineFire;
-    
+    //[SerializeField]                // 15-120 Laser shot sound audio (drag & drop to populate)
+    //AudioClip _laserAudio;
+    [SerializeField]                // 15-120 Laser shot sound audio (drag & drop to populate)
+    AudioSource _laserAudio;
 
 
     // for demo purposes check horizontal input
@@ -85,6 +88,8 @@ public class Player : MonoBehaviour
         // take the current position and assign to it a start position - snap to zero 0,0,0
 
         _uiManager = GameObject.Find("UI_Manager").transform.GetComponent<UIManager>();     // 12-96 Lives display, or before
+
+        _laserAudio = GameObject.Find("Laser_audio").transform.GetComponent<AudioSource>();  // 15-120 Laser shot audio - get handle
     }
 
     // Update is called once per frame
@@ -193,6 +198,7 @@ public class Player : MonoBehaviour
             // 5-36 offset laser object's instantiation position to avoid clipping Player primitive
             Instantiate(_laserPrefab, new Vector3(transform.position.x, transform.position.y + _laser_spawn_offset, transform.position.z), Quaternion.identity);   // spawn 'laser' object at Player's position, and default rotated
         }                                                                                                                                                                   //}
+        _laserAudio.Play();     // 15-120 Laser shot sound - play audio of audio clip used in Laser_Audio Audio Source
     }
 
 
