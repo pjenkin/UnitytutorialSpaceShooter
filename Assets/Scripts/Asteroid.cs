@@ -35,9 +35,9 @@ public class Asteroid : MonoBehaviour
     /// 13-108 Asteroid behaviour
     /// </summary>
     /// <param name="angular_speed"></param>
-    public void Rotate(float angular_speed = 1f)
+    public void Rotate(float angular_speed = 20f)
     {
-        transform.Rotate(Vector3.forward * angular_speed);
+        transform.Rotate(Vector3.forward * angular_speed * Time.deltaTime);
     }
 
 }
