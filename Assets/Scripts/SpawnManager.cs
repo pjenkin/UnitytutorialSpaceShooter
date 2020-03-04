@@ -76,17 +76,21 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
 
     // Start is called before the first frame update
     void Start()
-    {
+    {       
+    }
 
+    /// <summary>
+    /// Run the spawning coroutines
+    /// Coroutines moved here from Start
+    /// 13-112 Controlling the spawn wave through asteroid happenings
+    /// </summary>
+    public void StartSpawning()
+    {
         _spawn_enemy_coroutine = SpawnEnemyRoutine(_spawn_interval);
         StartCoroutine(_spawn_enemy_coroutine);         // run the Spawning method of the SpawnManager every 5 seconds e.g.
         // NB could have used a string as the name of the coroutine routine
         _spawn_powerup_coroutine = SpawnPowerupRoutine(_tripleshot_spawn_interval_min);      // 9-71 Spawning tripleshot powerup
         StartCoroutine(_spawn_powerup_coroutine);
-        /*
-        _spawn_speed_coroutine = SpawnSpeedPowerupRoutine(_speed_spawn_interval_min);
-        StartCoroutine(_spawn_speed_coroutine);
-        */
     }
 
     // Update is called once per frame
@@ -101,6 +105,8 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
 
     IEnumerator SpawnEnemyRoutine(float interval = 5f)
     {
+        yield return new WaitForSeconds(3f);        // 13-112 A little delay before starting to spawn enemies
+
         // while (true) // while loop (infinite loop)
         while (!_stopSpawning)    // 7-54 stop spawning when Player dies (from .Damage)
         {
@@ -122,6 +128,9 @@ public class SpawnManager : MonoBehaviour       // bespoke Enemy spawn manager c
     /// 
     IEnumerator SpawnPowerupRoutine(float interval = 3f)
     {
+
+        yield return new WaitForSeconds(3f);        // 13-112 A little delay before starting to spawn powerups
+
         // 9-71 Spawn tripleshot powerup every 3-7 seconds
         while (!_stopSpawning)
         {
