@@ -89,7 +89,12 @@ public class Player : MonoBehaviour
 
         _uiManager = GameObject.Find("UI_Manager").transform.GetComponent<UIManager>();     // 12-96 Lives display, or before
 
-        _laserAudio = GameObject.Find("Laser_audio").transform.GetComponent<AudioSource>();  // 15-120 Laser shot audio - get handle
+        _laserAudio = GameObject.Find("Laser_audio")?.transform.GetComponent<AudioSource>();  // 15-120 Laser shot audio - get handle
+        // could null check here
+        if (_laserAudio == null)
+        {
+            Debug.LogError("Laser_audio is null");
+        }
     }
 
     // Update is called once per frame
