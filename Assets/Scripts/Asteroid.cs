@@ -22,18 +22,19 @@ public class Asteroid : MonoBehaviour
     [SerializeField]
     public GameObject _explosionPrefab;
     private SpawnManager _spawnManager;
-    private AudioManager _audioManager;     // my take on 15-122 Explosion sound
+    //private AudioManager _audioManager;     // my take on 15-122 Explosion sound
 
     // Start is called before the first frame update
     void Start()
     {
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();  // 13-112 Controlling the spawn wave via the asteroid's fate
-
+/*
         _audioManager = GameObject.Find("Audio_Manager")?.transform.GetComponent<AudioManager>();        // my take on 15-122 Explosion sound
         if (_audioManager == null)
         {
             Debug.LogError("_audioManager is null");
         }
+*/
     }
 
     // Update is called once per frame
@@ -64,7 +65,7 @@ public class Asteroid : MonoBehaviour
             // destroy the explosion after 3 seconds
 
             GameObject newExplosion = Instantiate(_explosionPrefab, this.transform.position, Quaternion.identity);
-            _audioManager.PlayExplosion();
+            // _audioManager.PlayExplosion();
             Destroy(collision.gameObject);             // Destroy the (colliding) laser along with everything else
             _spawnManager.StartSpawning();              // 13-112 Controlling the spawn wave through the asteroid - start spawning only when asteroid destroyed
             Destroy(this.gameObject.transform.parent?.gameObject);
